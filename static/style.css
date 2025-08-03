@@ -1,0 +1,459 @@
+/* static/style.css - Updated for Fixed Header, Full Width Chat Box, Auto-Adjusting Column Width (No Wrap) */
+/* General body styling */
+body {
+    font-family: "CognizantSans", sans-serif;
+    margin: 0;
+    padding: 0; /* No padding on body itself */
+    background-color: #F7F7F5; /* Softer, light blue/teal background */
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    min-height: 100vh; /* Make body take at least full viewport height */
+    box-sizing: border-box;
+    position: relative;
+    justify-content: flex-start; /* Align items from the start */
+    align-items: stretch; /* Stretch items to fill the width */
+}
+
+/* Fixed Header Wrapper */
+.header-fixed {
+    position: fixed; /* Fix position */
+    top: 0;
+    left: 0;
+    right: 0; /* Stretch across the top */
+    z-index: 1000; /* Ensure it's above other content */
+    background-color: #000048; /* Soft background */
+    padding: 15px 20px; /* Add internal padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    text-align: center; /* Center content horizontally */
+}
+
+/* Heading styling */
+h1 {
+    text-align: left; /* Keep text centered */
+    color: #FFFFFF;
+    margin: 0; /* Remove margin as padding is on the parent .header-fixed */
+    font-size: 1.8em;
+    font-weight: 600;
+    line-height: 1.2; /* Adjust line height if needed */
+}
+
+/* Chat container (Takes available space between fixed header and form) */
+.chat-container {
+    flex-grow: 1; /* Allow it to take remaining vertical space */
+    width: 100%; /* Full width */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    background: transparent; /* Ensure no background color adds extra space */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    box-sizing: border-box; /* Include padding and border in width/height */
+}
+
+
+/* Chat display area (Main scrollable content) */
+.chat-box {
+    flex-grow: 1; /* Allow chat-box to take vertical space within chat-container */
+    max-height: none; /* Remove fixed or max-height as flex handles height */
+    overflow-y: auto; /* Vertical scrolling */
+    overflow-x: hidden; /* Horizontal scrolling for wide content like tables */
+    background-color: #f8f9fa; /* Light background for the chat box itself */
+    border-radius: 8px; /* Add back border radius for the chat box */
+    padding: 15px; /* Padding inside the chat box */
+    margin: 0; /* Remove margin */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0; /* Ensure it can shrink if necessary */
+    width: 100%; /* Fill the width of the chat-container (minus its padding) */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+/* Individual message styling */
+.message {
+    margin-bottom: 5px;
+    padding: 12px 16px;
+    border-radius: 20px;
+    max-width: 85%; /* Keep max-width relative to chat-box */
+    word-wrap: break-word; /* Keep for general message text */
+    line-height: 1.4;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+    flex-shrink: 0; /* Prevent messages from shrinking */
+}
+
+/* User message styling */
+.user-message {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+/* AI message styling */
+.ai-message {
+    align-self: flex-start;
+    background-color: #e9ecef;
+    color: #333;
+    border-bottom-left-radius: 5px;
+    overflow: auto; /* Enable overflow handling */
+    word-wrap: break-word;
+    padding: 12px 16px;
+    max-width: 85%;
+    display: block; /* Ensure block display to contain internal elements */
+}
+
+/* System message styling */
+.system-message {
+    align-self: center;
+    background-color: #92BBE6;
+    color: #000048;
+    font-family: "CognizantSans", sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 5px auto;
+    padding: 8px 12px;
+    border-radius: 12px;
+    overflow: auto; /* Enable overflow handling */
+    word-wrap: break-word;
+    max-width: 85%;
+    display: block; /* Ensure block display to contain internal elements */
+}
+
+/* Styles for the dynamically generated Results Table */
+.results-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    max-width: 100%; /* Ensure container does not overflow */
+    background-color: #ffffff; /* White background for table */
+    border-radius: 8px; /* Match AI/system message border radius */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Optional: Add a subtle shadow */
+    padding: 10px;
+    margin: 10px 0; /* Space above and below table */
+}
+
+.results-table {
+    border-collapse: collapse; /* Collapse borders so they don't double */
+    width: 100%; /* Make the table take the width of its container */
+    margin: 0; /* No margin inside the table */
+    background-color: #ffffff; /* White background for table */
+    flex-shrink: 0; /* Prevent table from shrinking */
+}
+
+.results-table th,
+.results-table td {
+    border: 1px solid #dddddd; /* Add a 1px solid light grey border */
+    text-align: left; /* Align text to the left */
+    padding: 10px 12px; /* Add padding inside cells */
+    white-space: nowrap; /* Prevent text from wrapping */
+    word-break: normal; /* Ensure word breaking is off for table cells */
+}
+
+.results-table th {
+    background-color: #000048; /* Green background for headers */
+    color: white; /* White text color for headers */
+    font-weight: bold; /* Bold text for headers */
+    text-transform: capitalize; /* Capitalize header text */
+}
+
+/* Optional: Add zebra stripes for better readability */
+.results-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Light grey background for even rows */
+}
+
+/* Optional: Hover effect on rows */
+.results-table tbody tr:hover {
+    background-color: #e9e9e9; /* Slightly darker background on hover */
+}
+
+/* Pagination Container */
+.pagination {
+    display: flex;
+    justify-content: center; /* Center pagination controls */
+    align-items: center;
+    gap: 10px; /* Space between pagination elements */
+    margin-top: 20px; /* Space above pagination controls */
+    margin-bottom: 20px; /* Space below pagination controls */
+}
+
+/* Pagination Button Styling */
+.pagination-button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: 1px solid transparent; /* Border removed by default */
+    padding: 10px 15px;
+    margin: 0; /* No margin between buttons */
+    cursor: pointer;
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+    font-size: 1em; /* Button font size */
+}
+
+.pagination-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004494; /* Add slight border color on hover */
+}
+
+.pagination-button:disabled {
+    background-color: #e9ecef; /* Disabled button color */
+    color: #666666;
+    border: 1px solid #dddddd; /* Keep a light border */
+    cursor: default;
+}
+
+/* Page Number Display */
+.page-number {
+    font-weight: bold;
+    background-color: #f8f9fa; /* Light background for page display */
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 5px; /* Match button radius */
+    margin: 0; /* Match button spacing */
+}
+
+/* Page Input Styling */
+.page-input {
+    width: 60px;
+    padding: 10px 15px;
+    border: 1px solid #ced4da; /* Light grey border */
+    border-radius: 5px; /* Match button radius */
+    text-align: center;
+    font-size: 1em;
+}
+
+/* Go Button Styling */
+.pagination button.go-to-page {
+    padding: 10px 15px;
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 5px; /* Match button radius */
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+    font-size: 1em; /* Button font size */
+}
+
+.pagination button.go-to-page:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #004494; /* Add slight border color on hover */
+}
+
+/* Chat input form styling - No longer fixed */
+.chat-form {
+    padding: 15px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px; /* Add spacing from the chat box */
+}
+
+/* Chat form input styling */
+.chat-form input[type="text"] {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    min-width: 0; /* Allow input to shrink */
+}
+
+/* Chat form input focus styling */
+.chat-form input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Send Button Styling */
+.chat-form button[type="submit"] {
+    padding: 12px 25px;
+    background-color: #26EFE9; /* Dark grey */
+    color: white; /* White text/symbol color */
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.2em; /* Slightly larger font size for the symbol */
+    font-weight: 600;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+    line-height: 1;
+}
+
+/* Send Button hover styling */
+.chat-form button[type="submit"]:hover {
+    background-color: #000048; /* Darker grey on hover */
+}
+
+/* Send Button active styling */
+.chat-form button[type="submit"]:active {
+    background-color: #1d2124; /* Even darker when clicked */
+}
+
+/* New Chat Button Styling */
+.chat-form button#new-chat-button {
+    width: 45px; /* Fixed width */
+    height: 45px; /* Fixed height */
+    border-radius: 50%; /* Make it round */
+    padding: 0; /* Remove padding */
+    display: flex; /* Use flex to center the plus symbol */
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* White background */
+    color: #000048; /* Grey symbol color (Bootstrap secondary grey) */
+    border: 1px solid #000048; /* Light grey border */
+    font-size: 1.8em; /* Larger font size for the plus symbol */
+    font-weight: normal; /* Standard weight for plus symbol */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+/* New Chat Button hover styling */
+.chat-form button#new-chat-button:hover {
+    background-color: #f8f9fa; /* Very light grey on hover */
+    color: #000048; /* Slightly darker grey symbol */
+    border-color: #bcc5cc; /* Slightly darker border */
+}
+
+/* New Chat Button active styling */
+.chat-form button#new-chat-button:active {
+    background-color: #000048; /* Light grey when clicked */
+    color: #545b62;
+    border-color: #b1b8bd;
+}
+
+/* Basic responsiveness */
+@media (max-width: 768px) {
+    /* Adjust padding for fixed header */
+    .header-fixed {
+        padding: 10px 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    /* Adjust margins for chat container based on smaller header/form */
+    .chat-container {
+        margin-top: 50px; /* Header height est. */
+        margin-bottom: 70px; /* Form height est. */
+        padding: 0 10px; /* Smaller side padding */
+    }
+
+    /* Adjust chat box padding */
+    .chat-box {
+        padding: 10px;
+    }
+
+    /* Adjust message max-width */
+    .message {
+        max-width: 95%;
+    }
+
+    /* Adjust form padding and gap */
+    .chat-form {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    /* Adjust form elements padding/size */
+    .chat-form input[type="text"] {
+        padding: 10px 15px;
+    }
+
+    .chat-form button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 1.1em;
+    }
+
+    /* Adjust new chat button size */
+    .chat-form button#new-chat-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.6em;
+    }
+
+    /* Table cell styles - removed min-width */
+    .chat-box th,
+    .chat-box td {
+        white-space: nowrap; /* Keep nowrap */
+        word-break: normal; /* Keep normal */
+    }
+}
+
+/* Extra small device responsiveness */
+@media (max-width: 480px) {
+    /* Adjust padding for fixed header */
+    .header-fixed {
+        padding: 8px 8px;
+    }
+
+    h1 {
+        font-size: 1.3em;
+    }
+
+    /* Adjust margins for chat container based on smaller header/stacked form */
+    .chat-container {
+        margin-top: 40px; /* Header height est. */
+        margin-bottom: 140px; /* Form height est. */
+        padding: 0 8px; /* Smaller side padding */
+    }
+
+    /* Adjust chat box padding */
+    .chat-box {
+        padding: 8px;
+    }
+
+    /* Form layout when stacked */
+    .chat-form {
+        flex-direction: column; /* Stack items vertically */
+        gap: 8px;
+        padding: 8px;
+        align-items: stretch; /* Stretch items to fill width */
+    }
+
+    .chat-form input[type="text"],
+    .chat-form button[type="submit"] {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px; /* Standard corners when stacked */
+        padding: 10px;
+    }
+
+    .chat-form button#new-chat-button {
+        border-radius: 50%; /* Keep it round */
+        width: 45px; /* Fixed size */
+        height: 45px;
+        padding: 0;
+        font-size: 1.8em;
+        align-self: center; /* Center in the stacked column */
+        margin: 0 auto; /* Center horizontally */
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    /* Table cell styles - removed min-width */
+    .chat-box th,
+    .chat-box td {
+        white-space: nowrap; /* Keep nowrap */
+        word-break: normal; /* Keep normal */
+    }
+}
+
+/* Ensure the message content wrapper respects padding and doesn't cause overflow */
+.message-content {
+    max-width: 100%; /* Limit width to parent */
+    box-sizing: border-box;
+}
+
+/* Ensure text inside NL response wraps and preserves line breaks */
+.nl-response {
+    word-wrap: break-word; /* Ensure long words break */
+    white-space: pre-wrap; /* Preserve line breaks from \n characters */
+    margin: 0 0 10px 0; /* Add space below NL text if a table follows */
+}

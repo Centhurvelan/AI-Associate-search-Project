@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associate Search</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="sticky top-0 bg-[#000048] p-0 z-[1030]">
+        <nav class="max-w-full h-[56px] flex items-center px-0 mx-auto" style="background: #000048;">
+            <div class="flex items-center justify-between w-full max-w-[1440px] px-[72px] md:px-6 sm:px-4">
+                <div class="flex items-center min-w-[286px] max-w-[286px] mr-9">
+                    <button tabindex="0"
+                        class="w-7 h-7 bg-[url('../assets/images/platformBar/menu3Lines.svg')] bg-no-repeat bg-left bg-[length:22px_28px] me-3"
+                        type="button"></button>
+                    <a style="display: none;" tabindex="0" class="navbar-brand oneCHomeLink oneCbrand-logo">1C</a>
+                    <a tabindex="0" class="text-white text-[18px] font-[Gellix-SemiBold] cursor-pointer truncate"
+                        onclick="NavigateToHomePageOfApp();">
+                        AIA POC<span
+                            class="absolute top-[19px] pl-[2px] text-[12px] text-[#85A0F9] leading-normal"></span>
+                    </a>
+                </div>
+                <!-- Left side menu -->
+                <ul class="hidden md:flex items-center justify-center space-x-12">
+                    <li class="relative text-center">
+                        <a tabindex="0"
+                            class="text-[#06C7CC] text-[16px] font-[Gellix-SemiBold] h-6 cursor-pointer hover:text-[#26EFE9] bg-[url('../assets/images/platformBar/myActionsDefault.svg')] bg-no-repeat bg-[left_10px_center] pl-10">
+                        </a>
+                        <span id="myAction_Count"
+                            class="absolute z-[99] -top-1 left-[11px] w-4 h-4 leading-4 text-[10px] rounded-full text-center cursor-pointer text-[#000048] bg-[#26EFE9] font-[Gellix-Regular]"
+                            style="display:none"></span>
+                    </li>
+                    <li class="text-center">
+                        <a tabindex="0"
+                            class="text-[#06C7CC] text-[16px] font-[Gellix-SemiBold] h-6 cursor-pointer hover:text-[#26EFE9] bg-[url('../assets/images/platformBar/mdc_default.svg')] bg-no-repeat bg-[left_10px_center] pl-10">
+                        </a>
+                    </li>
+                </ul>
+                <!-- Right side profile icon -->
+                <ul class="flex items-center mr-0">
+                    <li>
+                        <a tabindex="0" role="button" class="dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+<!--                            <img src="profile-icon.png" alt="Profile Icon"-->
+<!--                                class="w-8 h-8 rounded-full object-cover mt-2.5" />-->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <div
+        class="w-full h-[248px] mx-auto border-t border-[#6aa2dc] bg-[linear-gradient(94deg,#C96971_-7.47%,#5B3D96_15.24%,#201074_34.36%,#0B58AA_74.77%,#000048_100.44%)] relative">
+        <div class="max-w-[1440px] relative mx-auto flex flex-col items-center px-[72px]">
+            <div class="w-full max-w-[900px]">
+                <h2 class="text-white text-center text-[20px] font-[Gellix-SemiBold] mt-4 mb-4 truncate"></h2>
+            </div>
+            <div class="w-full max-w-[600px] mx-auto">
+                <div class="relative">
+                    <input type="text"
+                        class="block mx-auto w-full max-w-[752px] h-12 rounded-lg pl-11 pr-13 text-[#000048] text-[14px] border border-[#6AA2DC] bg-white bg-[url('../assets/images/landingPage/searchInputBarIcon.svg')] bg-no-repeat bg-[14px_center] bg-[length:20px]"
+                        placeholder="Search" autocomplete="off">
+                    <div tabindex="0" role="button"
+                        class="absolute top-1/2 right-3 w-[30px] h-[30px] -translate-y-1/2 cursor-pointer bg-[url('../assets/images/landingPage/search1CMic.svg')] bg-no-repeat bg-center bg-[length:30px_23px]">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-6">
+                <div class="flex justify-center">
+                    <div class="w-full">
+                        <div class="flex flex-wrap justify-center gap-4 py-4">
+                            <button type="button" id="btn0"
+                                class="h-[45px] px-6 text-[14px] font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all duration-200"
+                                onclick="LaunchActivityfromChip(86, 39, 2);">Resume Search</button>
+                            <button type="button" id="btn1"
+                                class="h-[45px] px-6 text-[14px] font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all duration-200"
+                                onclick="LaunchActivityfromChip(4, 39, 2);">Associate Search</button>
+                            <button type="button" id="btn2"
+                                class="h-[45px] px-6 text-[14px] font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all duration-200"
+                                onclick="LaunchActivityfromChip(87, 39, 2);">Code Analyzer</button>
+<!--                            <button type="button" id="btn3"-->
+<!--                                class="h-[45px] px-6 text-[14px] font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 shadow-md transition-all duration-200"-->
+<!--                                onclick="LaunchActivityfromChip(163, 39, 2);">SO-Validation</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Associate Search -->
+    <div id="associate-search-section" class="chat-container" style="display: none;">
+        <h2 id="associate-search-title" class="text-center text-[24px] font-semibold mb-6">Associate Search</h2>
+        <div id="chat-box" class="chat-box">
+        </div>
+        <form id="chat-form" class="chat-form">
+            <input type="text" id="user-input" placeholder="Ask about the associate details..." autocomplete="off">
+            <button type="submit" id="send-button">&#x27A6;</button>
+            <button type="button" id="new-chat-button" title="Start New Chat">&#x002B;</button>
+        </form>
+    </div>
+    <script>
+       document.getElementById('btn1').addEventListener('click', () => {
+    const associateSearchSection = document.getElementById('associate-search-section');
+    const associateSearchTitle = document.getElementById('associate-search-title');
+    associateSearchSection.style.display = 'block'; // Show the section
+    associateSearchTitle.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Scroll to the title
+});
+    </script>
+    <script src="static/script.js"></script>
+    <!-- Footer -->
+    <footer class="mt-10 w-full overflow-hidden">
+        <div class="bg-[#2F78C4] py-2 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+            <div class="flex flex-wrap justify-between items-center max-w-[1440px] mx-auto px-[72px] md:px-6 sm:px-4">
+                <div class="flex flex-wrap gap-5 w-full md:w-auto justify-center md:justify-start mb-2 md:mb-0">
+                    <a href="https://www.youtube.com/cognizant" target="_blank" aria-label="Youtube opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/youtubeIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                    <a href="https://web.yammer.com/main/org/cognizant.com/feed" target="_blank"
+                        aria-label="yammer opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/yammerIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                    <a href="https://www.linkedin.com/company/cognizant" target="_blank"
+                        aria-label="LinkedIn opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/linkedInIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                    <a href="https://cognizant.kpoint.com/web/" target="_blank" aria-label="kpoint opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/kPointIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                    <a href="https://www.instagram.com/cognizant" target="_blank"
+                        aria-label="Instagram opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/instagramIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                    <a href="https://www.facebook.com/Cognizant" target="_blank" aria-label="Facebook opens in new tab"
+                        class="w-6 h-6 cursor-pointer bg-[url('../assets/images/landingPage/facebookIcon.svg')] bg-no-repeat bg-center bg-[length:24px_24px] filter invert brightness-0 hover:filter-none"></a>
+                </div>
+                <div class="flex items-center justify-center w-full md:w-auto">
+                    <p class="text-white m-0 text-[14px]">© 2025 Cognizant. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-[#000048] py-10 w-full">
+            <div class="w-full max-w-[1440px] mx-auto px-5 md:px-6 sm:px-4">
+                <div class="flex flex-wrap w-full justify-between m-0">
+                    <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8">
+                        <p class="font-semibold mb-5 text-white text-[16px]">Key References</p>
+                        <ul class="list-none pl-0 mt-2 mb-0">
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/CorporateFunctions/SitePages/Global-Corporate-Policies.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Global
+                                    Corporate Policy</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/compliance-helpline" target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Ethics
+                                    &amp; Compliance</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/CorporateFunctions/SitePages/Corporate-Security.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Corporate
+                                    Security</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/in/en" target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Cognizant.com</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8">
+                        <p class="font-semibold mb-5 text-white text-[16px]">Explore</p>
+                        <ul class="list-none pl-0 mt-2 mb-0">
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/GlobalHR/SitePages/Benefits-and-Wellbeing.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Benefits
+                                    &amp; Wellbeing</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/GlobalHR/SitePages/People.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Human
+                                    Resources</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/GlobalHR/SitePages/Careers-Home.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Careers</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/us/en/insights/tech-to-watch" target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Tech
+                                    to watch</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8">
+                        <p class="font-semibold mb-5 text-white text-[16px]">About Cognizant</p>
+                        <ul class="list-none pl-0 mt-2 mb-0">
+                            <li class="mb-3">
+                                <a href="https://cognizantonline.sharepoint.com/sites/Business/SitePages/Environmental-Social-Governance.aspx"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Cognizant
+                                    Sustainability</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/us/en/about-cognizant/diversity-and-inclusion"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Diversity
+                                    &amp; Inclusion</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/us/en/about-cognizant/culture-and-values"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Culture
+                                    &amp; Values</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://www.cognizant.com/us/en/about-cognizant/corporate-governance/leadership-team"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Leadership
+                                    Team</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="w-full sm:w-1/2 md:w-1/4 px-4 mb-8">
+                        <p class="font-semibold mb-5 text-white text-[16px]">Our Offerings</p>
+                        <ul class="list-none pl-0 mt-2 mb-0">
+                            <li class="mb-3">
+                                <a href="https://onecognizant.cognizant.com/Home?GlobalAppId=343" target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Communication
+                                    Services</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://onecognizantcdn.cognizant.com/OneCCore/AppIcons/appicons2.0/TodosIcons/card_defaultmobile.png"
+                                    target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">OneCognizant
+                                    Mobile</a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="https://onecognizant.cognizant.com/Home?GlobalAppId=1992" target="_blank"
+                                    class="text-[#92BBE6] hover:text-white underline-offset-2 hover:underline text-[14px] transition-colors">Engagement
+                                    &amp; Survey</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

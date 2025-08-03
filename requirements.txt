@@ -1,0 +1,6 @@
+pyodbc
+python-dotenv
+fastmcp
+openai
+fastapi
+uvicorn
